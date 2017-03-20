@@ -6,7 +6,7 @@ import urllib
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
-VAR_KEYWORDS='运维'
+VAR_KEYWORDS='文员'
 VAR_PAGES=1
 def getHtml(pages):
 	params = urllib.urlencode({'curr_page':pages,'fromJs': 1,'jobarea': '030200','keyword':VAR_KEYWORDS,'keywordtype': 2,'lang': 'c','stype': 2,'postchannel': 0000,'fromType': 1,'confirmdate': 9})
@@ -22,11 +22,12 @@ def getHtml(pages):
 #	return imglist
 
 def grep(html):
-	reg = re.compile(r'.*s=01.*')
+	reg = re.compile(r'.*target="_blank" title.*')
 	items = re.findall(reg,html)
 	return items 
 def findurl(html):
-        items = re.findall(r'\"([^\"]*)\"',html)
+        items = re.findall(r'title.*',html)
+        items = re.findall(r'\"([^\"]*)\"',items[0])
         return items
 def allpages(html):
         items = re.findall(r'jumpPage\(\'\d{1,5}\'\)',html)
@@ -46,5 +47,5 @@ while pages>0:
 	ghtml=grep(html)
 	for a in ghtml:
 		b=findurl(a)
-		print b[1],b[2]
+		print b[0],b[1]
 
