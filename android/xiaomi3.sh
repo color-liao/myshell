@@ -12,7 +12,7 @@ tcpdump -i wlan0 -X -vv  -w /sdcard/wlan0-tcp.cap tcp
 tcpdump -i wlan0 -X -vv -w /sdcard/wlan0-arp.cap arp
 
 #netstat
-netstat -pel
+netstat -pelot
 
 
 #
